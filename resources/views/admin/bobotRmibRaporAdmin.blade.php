@@ -37,19 +37,7 @@
                   <a class="nav-link active" id="custom-tabs-four-rmibs-tab" data-toggle="pill" href="#rmibs" role="tab" aria-controls="custom-tabs-four-rmibs" aria-selected="false">RMIB</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-four-bahasa-tab" data-toggle="pill" href="#bahasa" role="tab" aria-controls="custom-tabs-four-bahasa" aria-selected="false">Bahasa</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-four-logika-tab" data-toggle="pill" href="#logika" role="tab" aria-controls="custom-tabs-four-logika" aria-selected="false">Logika</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-four-sains-tab" data-toggle="pill" href="#sains" role="tab" aria-controls="custom-tabs-four-sains" aria-selected="false">Sains</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-four-sosial-tab" data-toggle="pill" href="#sosial" role="tab" aria-controls="custom-tabs-four-sosial" aria-selected="false">Sosial</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-four-praktik-tab" data-toggle="pill" href="#praktik" role="tab" aria-controls="custom-tabs-four-praktik" aria-selected="false">Praktik</a>
+                  <a class="nav-link" id="custom-tabs-four-rmibs-tab" data-toggle="pill" href="#rapor" role="tab" aria-controls="custom-tabs-four-rmibs" aria-selected="false">Rapor</a>
                 </li>
             </ul>
           </div>
@@ -116,9 +104,8 @@
                             </div>
                           </div>
                       </div>
-
-                      
                       <!-- End Modal -->
+                      
                       <div class="col-12">
                           <div class="table-responsive">
                           <table id="myTable" class="display expandable-table" style="width:100%">
@@ -168,7 +155,7 @@
                                                           @csrf
                                                             <div class="form-group">
                                                                 <label for="alternatif">Jurusan</label>
-                                                                <select name="alternatif" id="alternatif" class="form-control">
+                                                                <select name="alternatif" id="alternatif" class="form-control" disabled>
                                                                   @foreach ($alternatif as $altf) 
                                                                   <option value="{{ $altf->id }}" {{ $altf->id == $alt->id_alternatif ? 'selected' : ''}}>{{ $altf->nama_jurusan }}</option>
                                                                   @endforeach                                                  
@@ -249,59 +236,201 @@
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="bahasa" role="tabpanel" aria-labelledby="custom-tabs-four-bahasa-tab">
-                    <div class="row">
-                      <div class="col-3 mb-3">
-                        <!-- Button Model Tambah Data -->
-                        <a href="#aturNilai" class="btn btn-primary" data-toggle="modal">Atur Bobot Nilai</a>
+                  <div class="tab-pane fade show" id="rapor" role="tabpanel" aria-labelledby="custom-tabs-four-rmibs-tab">
+                      <div class="row">
+                        <div class="form col-3 mb-3">
+                          <!-- Button Model Tambah Data -->
+                          <a href="#tambahRapor" class="btn btn-primary" data-toggle="modal">Tambah</a>
+
+                          <!-- Modal Tambah Data -->
+                          <div class="modal fade" id="tambahRapor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Bobot Nilai Rapor</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/admin/bobotRapor" method="POST">
+                                          @csrf
+                                            <div class="form-group">
+                                                <label for="alternatif">Jurusan</label>
+                                                <select name="alternatif" id="alternatif" class="form-control">
+                                                  <option value="null">-- Pilih Jurusan --</option>
+                                                  @foreach ($alternatif as $altf) 
+                                                  <option value="{{ $altf->id }}">{{ $altf->nama_jurusan }}</option>
+                                                  @endforeach                                                  
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                              <div class="row">
+                                                <div class="col-sm-8">
+                                                  <label for="kategoriRmib">Mata Pelajaran</label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                  <label for="bobot">Bobot</label>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            @foreach ($mataPelajaran as $mapel)
+                                            <div class="form-group">
+                                              <div class="row">
+                                                <input type="hidden" name="id_mapel[]" id="id_mapel" value="{{ $mapel->id }}">
+                                                <div class="col-sm-8">
+                                                  <input type="text" class="form-control" id="mapel" name="mapel[]" value="{{ $mapel->nama_mapel }}" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                  <input type="number" class="form-control" id="bobot" name="bobot[]" required>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            @endforeach
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                      <!-- End Modal -->
+
                       <div class="col-12">
                         <div class="table-responsive">
-                          <table id="myTable" class="display expandable-table" style="width:100%">
-                            <thead>
-                              <tr>
-                                <th style="width: 30px" rowspan="2">No.</th>
-                                <th style="text-align:center" rowspan="2">Jurusan</th>
-                                <th style="text-align: center" colspan="5">Nilai Bobot Kriteria Bahasa</th>
-                              </tr>
-                              <tr>
-                                <th style="text-align: center">1</th>
-                                <th style="text-align: center">2</th>
-                                <th style="text-align: center">3</th>
-                                <th style="text-align: center">4</th>
-                                <th style="text-align: center">5</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($bobotRmib as $alt)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $alt->bbt_alt->nama_jurusan }}</td>
-                                        <td style="text-align: center">1</td>
-                                        <td style="text-align: center">2</td>
-                                        <td style="text-align: center">3</td>
-                                        <td style="text-align: center">4</td>
-                                        <td style="text-align: center">5</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                          </table>
-                        </div>
+                        <table id="myTable2" class="display expandable-table" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th style="width: 30px">No.</th>
+                              <th style="text-align:center">Jurusan</th>
+                              <?php
+                                $headMapels = DB::table('mata_pelajarans')
+                                            ->orderBy('no', 'asc')
+                                            ->get();
+                                foreach ($headMapels as $headMapel) { ?>
+                                    <th style="text-align:center">{{ $headMapel->nama_mapel }}</th>
+                                <?php } ?>
+                              <th style="text-align:center">Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              @foreach ($bobotRapor as $bbtRpr)
+                                  <tr>
+                                      <td>{{ $loop->iteration }}</td>
+                                      <td>{{ $bbtRpr->rpr_alt->nama_jurusan }}</td>
+                                      <?php
+                                        $bRapor = DB::table('bobot_rapors')
+                                                    ->where('id_alternatif', $bbtRpr->id_alternatif)
+                                                    ->orderBy('id_mapel', 'asc')
+                                                    ->get();
+                                        foreach ($bRapor as $rapor) { ?>
+                                          <td style="text-align: center">{{ $rapor->bobot }}</td>
+                                        <?php } ?>
+                                      <td style="text-align:center">
+                                        <!-- Button Model Ubah Data -->
+                                        <a href="#ubahRapor{{ $bbtRpr->id_alternatif }}" class="btn btn-success" data-toggle="modal">Ubah</a>
+      
+                                        <!-- Modal Ubah Data -->
+                                        <div class="modal fade" id="ubahRapor{{ $bbtRpr->id_alternatif }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Ubah Data Bobot Nilai Rapor</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/admin/aturbobotRapor" method="post">
+                                                        @csrf
+                                                          <div class="form-group">
+                                                              <label for="alternatif">Jurusan</label>
+                                                              <select name="alternatif" id="alternatif" class="form-control" disabled>
+                                                                @foreach ($alternatif as $altf) 
+                                                                <option value="{{ $altf->id }}" {{ $altf->id == $bbtRpr->id_alternatif ? 'selected' : ''}}>{{ $altf->nama_jurusan }}</option>
+                                                                @endforeach
+                                                              </select>
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <div class="row">
+                                                              <div class="col-sm-8">
+                                                                <label for="kategoriRmib">Mata Pelajaran</label>
+                                                              </div>
+                                                              <div class="col-sm-4">
+                                                                <label for="bobot">Bobot</label>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          @foreach ($bRapor as $bRpr)
+                                                          <div class="form-group">
+                                                            <div class="row">
+                                                              <input type="hidden" name="id[]" id="id" value="{{ $bRpr->id }}">
+                                                              <div class="col-sm-8">
+                                                                <?php
+                                                                  $mapels = DB::table('mata_pelajarans')
+                                                                                  ->where('id', $bRpr->id_mapel)->first();
+                                                                ?>
+                                                                <input type="text" class="form-control" id="nama_mapel" name="nama_mapel[]" value="{{ $mapels->nama_mapel }}" readonly>
+                                                              </div>
+                                                              <div class="col-sm-4">
+                                                                <input type="number" class="form-control" id="bobot" name="bobot[]" value="{{ $bRpr->bobot }}" required>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          @endforeach
+                                                          <div class="modal-footer">
+                                                              <button type="submit" class="btn btn-primary">Simpan</button>
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                          </div>
+                                                      </form>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal -->
+      
+                                        <!-- Button Model Hapus Data -->
+                                        <a href="#hapusRapor{{ $alt->id_alternatif }}" class="btn btn-danger" data-toggle="modal">Hapus</a>
+      
+                                        <!-- Modal Hapus Data -->
+                                        <div class="modal fade" id="hapusRapor{{ $alt->id_alternatif}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Hapus Data Bobot Nilai Rapor</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <form action="/admin/hapusbobotRapor" method="post">
+                                                        @csrf
+                                                          <input type="hidden" class="form-control" name="id_alternatif" value="{{ $alt->id_alternatif }}">
+                                                          <h4>Apakah anda yakin untuk menghapus data ini?</h4>
+                                                          <div class="modal-footer">
+                                                              <button type="submit" class="btn btn-danger">Hapus</button>
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                          </div>
+                                                      </form>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <!-- End Modal -->
+                                      </td>
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="logika" role="tabpanel" aria-labelledby="custom-tabs-four-logika-tab">
-                    <h3>hallo</h3>
-                  </div>
-                  <div class="tab-pane fade" id="sains" role="tabpanel" aria-labelledby="custom-tabs-four-sains-tab">
-                    <h3>hallo</h3>
-                  </div>
-                  <div class="tab-pane fade" id="sosial" role="tabpanel" aria-labelledby="custom-tabs-four-sosial-tab">
-                  </div>
-                  <div class="tab-pane fade" id="praktik" role="tabpanel" aria-labelledby="custom-tabs-four-praktik-tab">
-                  </div>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>

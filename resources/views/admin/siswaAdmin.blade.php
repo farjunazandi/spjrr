@@ -59,8 +59,11 @@
                                 </select>
                               </div>
                               <div class="form-group">
-                                  <label for="alamat">Alamat</label>
-                                  <textarea class="form-control" rows="3" name="alamat" ></textarea>
+                                <label for="jenis_kelamin">Jenis Kelamin</label>
+                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                                  <option value="0">Laki-laki</option>
+                                  <option value="1">Perempuan</option>
+                                </select>
                               </div>
                               <div class="form-group">
                                   <label for="aktif">Aktif</label>
@@ -90,6 +93,7 @@
                         <th style="width: 30px">No.</th>
                         <th style="text-align:center">NISN</th>
                         <th style="text-align:center">Nama</th>
+                        <th style="text-align:center">Jenis Kelamin</th>
                         <th style="text-align:center">Kelas</th>
                         <th style="text-align:center">Password</th>
                         <th style="text-align:center">Status</th>
@@ -102,6 +106,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $siswa->nisn }}</td>
                                 <td>{{ $siswa->nama }}</td>
+                                <td>{{ $siswa->jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td style="text-align: center">{{ $siswa->kls->nama_kelas }}</td>
                                 <td style="text-align: center">
                                     <!-- Button Model Ubah Data -->
@@ -165,16 +170,19 @@
                                                         <input type="text" class="form-control" id="nama" name="nama" value="{{ $siswa->nama }}" required>
                                                     </div>
                                                     <div class="form-group">
+                                                      <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                      <select class="form-control" name="jenis_kelamin">
+                                                          <option value="0" {{ $siswa->jenis_kelamin == 0 ? 'selected' : ''}}>Laki-laki</option>
+                                                          <option value="1" {{ $siswa->jenis_kelamin == 1 ? 'selected' : ''}}>Perempuan</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label>Kelas</label>
                                                         <select class="form-control" name="kelas">
                                                             @foreach ($kelas as $kls)
                                                             <option value="{{ $kls->id }}" {{ $siswa->id_kelas == $kls->id ? 'selected' : ''}}>{{ $kls->nama_kelas }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="alamat">Alamat</label>
-                                                        <textarea class="form-control" rows="3" name="alamat" >{{ $siswa->alamat }}</textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="aktif">Aktif</label>

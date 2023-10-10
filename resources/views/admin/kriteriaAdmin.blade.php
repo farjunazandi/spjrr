@@ -192,7 +192,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
-                            <table id="myTable" class="display expandable-table" style="width:100%">
+                            <table id="myTable2" class="display expandable-table" style="width:100%">
                               <thead>
                                 <tr>
                                   <th style="width: 30px">No.</th>
@@ -205,7 +205,7 @@
                               <tbody>
                                   @foreach ($kriteria as $krt)
                                       <tr>
-                                          <td>{{ $loop->iteration }}.</td>
+                                          <td style="width: 30px">{{ $loop->iteration }}.</td>
                                           <td style="text-align: center">{{ $krt->kode_kriteria }}</td>
                                           <td>{{ $krt->nama_kriteria }}</td>
                                           <td style="text-align: center">{{ $krt->bobot_kriteria }}%</td>
@@ -215,9 +215,10 @@
                               </tbody>
                               <tfoot>
                                   <tr style="text-align: center">
-                                      <th colspan="3">Jumlah</th>
-                                      <th>100%</th>
-                                      <th>1</th>
+                                      <th style="width: 30px"></th>
+                                      <th colspan="2" style="text-align: center">Jumlah</th>
+                                      <th style="text-align: center">100%</th>
+                                      <th style="text-align: center">1</th>
                                   </tr>
                               </tfoot>
                             </table>

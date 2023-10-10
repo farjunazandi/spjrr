@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class AuthController extends Controller
 
     public function auth()
     {
-        //return view('admin/authAdmin');
+        return view('siswa/authSiswa');
     }
 
     public function authAdmin()
@@ -67,6 +68,54 @@ class AuthController extends Controller
             return back()->with('loginerror', 'Login Failed!');
         }
     }
+
+    public function loginSiswa(Request $request)
+    {
+        $siswa = Siswa::where('nisn', $request->nisn)->first();
+
+        if ($siswa != null) {
+            if (password_verify($request->password, $siswa->password)) {
+                if ($siswa->aktif == '1') {
+                    if ($siswa->ubah_password == '1') {
+                        $request->session()->put('id', $siswa->id);
+                        return redirect()->intended('/siswa/homeSiswa');
+                    } else {
+                        return redirect('/ubahPasswordSiswa')->with('id', $siswa->id);
+                    }
+                } else {
+                    return back()->with('loginerror', 'Siswa sudah tidak aktif!');
+                }
+            } else {
+                return back()->with('loginerror', 'NISN atau password salah!');
+            }
+        } else {
+            return back()->with('loginerror', 'User tidak ditemukan!');
+        }
+    }
+
+    public function ubahPasswordSiswa()
+    {
+        return view('siswa/ubahPasswordSiswa');
+    }
+
+    public function ubahPasswordSiswaProses(Request $request)
+    {
+        $siswa = Siswa::where('id', $request->id)->first();
+
+        if (password_verify($request->password_lama, $siswa->password)) {
+            Siswa::where('id', $request->id)->update([
+                'password' => Hash::make($request->password_baru),
+                'default_password' => $request->password_baru,
+                'ubah_password' => '1'
+            ]);
+            $request->session()->put('id', $siswa->id);
+
+            return redirect()->intended('/siswa/homeSiswa');
+        } else {
+            return back()->with('loginerror', 'Password lama tidak sesuai!');
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -113,5 +162,26 @@ class AuthController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function logoutAdmin()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/admin')->with('registersuccess', 'Anda berhasil keluar!');
+    }
+
+    public function logoutSiswa()
+    {
+        //Siswa::logout();
+
+        session()->forget('tipe');
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/auth')->with('registersuccess', 'Anda berhasil keluar!');
     }
 }

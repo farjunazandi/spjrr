@@ -29,7 +29,7 @@
               {{-- <div class="brand-logo">
                 <img src="skydash/images/logo.svg" alt="logo">
               </div> --}}
-              <h2>Login Admin</h2>
+              <h2>Ubah Password</h2>
               @if(session()->has('loginerror'))
                 <div class="autohide alert alert-danger alert-dismissible fade show text-center" role="alert">
                   {{ session('loginerror'); }}
@@ -40,24 +40,23 @@
                     {{ session('registersuccess'); }}
                 </div>
               @endif
-              <h6 class="font-weight-light">Hai, Selamat Datang!</h6>
-              <form class="pt-3" action="/loginAdmin" method="POST">
+              <form class="pt-3" action="/ubahPasswordSiswaProses" method="POST">
                 @csrf
                 <div class="form-group">
-                  <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" required>
+                  <input type="hidden" name="id" class="form-control form-control-lg" value="{{ session('id'); }}">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" required>
+                  <input type="password" name="password_lama" class="form-control form-control-lg" placeholder="Password Lama" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password_baru" class="form-control form-control-lg" placeholder="Password Baru" required>
                 </div>
                 <div class="mt-3">
                   <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
+                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Simpan</button>
                   </div>
                 </div>
               </form>
-                <div class="text-center mt-4 font-weight-light">
-                  Belum mempunyai akun? <a href="{{ url('/adminRegister') }}" class="text-primary">Buat Akun</a>
-                </div>
             </div>
           </div>
         </div>

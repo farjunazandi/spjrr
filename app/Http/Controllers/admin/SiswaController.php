@@ -41,7 +41,7 @@ class SiswaController extends Controller
             'nisn' => $request->nisn,
             'id_kelas' => $request->kelas,
             'nama' => $request->nama,
-            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'password' => Hash::make($str),
             'default_password' => $str,
             'ubah_password' => '0',
@@ -76,7 +76,7 @@ class SiswaController extends Controller
             'nisn' => $request->nisn,
             'id_kelas' => $request->kelas,
             'nama' => $request->nama,
-            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'aktif' => $request->aktif
         ]);
 

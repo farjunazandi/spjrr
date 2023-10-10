@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('soal_rmibs', function (Blueprint $table) {
+        Schema::create('tes_rmibs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pekerjaan');
+            $table->unsignedBigInteger('id_siswa')->index();
             $table->unsignedBigInteger('id_kategori')->index();
-            $table->enum('tipe_soal', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'])->default('A');
-            $table->enum('jenis_kelamin', [0,1])->default(0);
+            $table->unsignedBigInteger('id_soal')->index();
+            $table->string('tipe_soal')->index();
+            $table->double('bobot')->default(0);
             $table->timestamps();
 
+            $table->foreign('id_siswa')->references('id')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_kategori')->references('id')->on('kategori_rmibs')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_soal')->references('id')->on('soal_rmibs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('soal_rmibs');
+        Schema::dropIfExists('tes_rmibs');
     }
 };

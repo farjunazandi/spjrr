@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Models\admin;
+namespace App\Models\siswa;
 
+use App\Models\admin\KategoriRmib;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SoalRmib extends Model
+class HasilRmib extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function kategori()
+    public function ktg()
     {
         return $this->belongsTo(KategoriRmib::class, 'id_kategori');
     }

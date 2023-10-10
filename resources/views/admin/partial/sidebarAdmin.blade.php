@@ -39,6 +39,7 @@
               <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/dataAdmin') }}">Data Admin</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/siswaAdmin') }}">Data Siswa</a></li>
               <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/kelasAdmin') }}">Data Kelas</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/mataPelajaran') }}">Mata Pelajaran</a></li>
             </ul>
           </div>
         </li>

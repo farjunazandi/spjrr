@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kelas')->index();
             $table->string('nama');
             $table->enum('jenis_kelamin', [0,1])->default(0);
-            $table->string('alamat', 500);
             $table->string('password');
             $table->string('default_password');
             $table->enum('ubah_password', [0,1])->default(0);

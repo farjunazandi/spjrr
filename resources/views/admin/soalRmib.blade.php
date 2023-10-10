@@ -47,6 +47,14 @@
                                   <input type="text" class="form-control" id="nama_pekerjaan" name="nama_pekerjaan" placeholder="Nama Pekerjaan" required autofocus>
                               </div>
                               <div class="form-group">
+                                <label for="kategori">Kategori</label>
+                                <select name="kategori" id="kategori" class="form-control">
+                                  @foreach ($kategori as $kat)
+                                    <option value="{{ $kat->id }}">{{ $kat->kategori }}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                              <div class="form-group">
                                 <label for="tipe_soal">Tipe Soal</label>
                                 <select name="tipe_soal" id="tipe_soal" class="form-control">
                                   <option value="A">A</option>
@@ -87,6 +95,7 @@
                       <tr>
                         <th style="width: 30px">No.</th>
                         <th style="text-align:center">Nama Pekerjaan</th>
+                        <th style="text-align:center">Kategori</th>
                         <th style="text-align:center">Tipe Soal</th>
                         <th style="text-align:center">Jenis Kelamin</th>
                         <th style="text-align:center">Aksi</th>
@@ -95,10 +104,11 @@
                     <tbody>
                         @foreach ($soalRmib as $soal)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $loop->iteration }}.</td>
                                 <td>{{ $soal->nama_pekerjaan }}</td>
+                                <td>{{ $soal->kategori->kategori }}</td>
                                 <td style="text-align:center">{{ $soal->tipe_soal }}</td>
-                                <td style="text-align:center">{{ $soal->jenis_kelamin == 0 ? 'lk' : 'pr' }}</td>
+                                <td style="text-align:center">{{ $soal->jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td style="text-align:center">
                                   <!-- Button Model Ubah Data -->
                                   <a href="#ubah{{ $soal->id }}" class="btn btn-success" data-toggle="modal">Ubah</a>
@@ -121,6 +131,14 @@
                                                     <div class="form-group">
                                                         <label for="nama_pekerjaan">Nama Pekerjaan</label>
                                                         <input type="text" class="form-control" id="nama_pekerjaan" name="nama_pekerjaan" value="{{ $soal->nama_pekerjaan }}" required autofocus>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="kategori">Kategori</label>
+                                                      <select name="kategori" id="kategori" class="form-control">
+                                                        @foreach ($kategori as $kat)
+                                                          <option value="{{ $kat->id }}" {{ $kat->id == $soal->id_kategori ? 'selected' : ''}}>{{ $kat->kategori }}</option>
+                                                        @endforeach
+                                                      </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tipe_soal">Tipe Soal</label>

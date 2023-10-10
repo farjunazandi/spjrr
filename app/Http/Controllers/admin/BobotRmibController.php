@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\admin\BobotRmib;
+use App\Models\admin\BobotRapor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Alternatif;
 use App\Models\admin\KategoriRmib;
+use App\Models\admin\Kriteria;
+use App\Models\admin\MataPelajaran;
 
 class BobotRmibController extends Controller
 {
@@ -19,7 +22,11 @@ class BobotRmibController extends Controller
         $bobotRmib = BobotRmib::select('id_alternatif')->groupBy('id_alternatif')->get();
         $kategoriRmib = KategoriRmib::all();
 
-        return view('admin/bobotRmibRaporAdmin', compact('alternatif', 'bobotRmib', 'kategoriRmib'));
+        $kriteriaRapor = Kriteria::where('kriteria_rapor', '1')->orderBy('kode_kriteria', 'asc')->get();
+        $mataPelajaran = MataPelajaran::where('aktif', '1')->orderBy('no', 'asc')->get();
+        $bobotRapor = BobotRapor::select('id_alternatif')->groupBy('id_alternatif')->get();
+
+        return view('admin/bobotRmibRaporAdmin', compact('alternatif', 'bobotRmib', 'kategoriRmib', 'kriteriaRapor', 'bobotRapor', 'mataPelajaran'));
     }
 
     /**

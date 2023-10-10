@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Models\admin\BobotRapor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\admin\Alternatif;
+use App\Models\admin\Kriteria;
 
 class BobotRaporController extends Controller
 {
@@ -13,7 +15,7 @@ class BobotRaporController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -29,7 +31,22 @@ class BobotRaporController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->alternatif != "null")
+        {
+            $count = count($request->id_mapel);
+
+            for ($i = 0; $i < $count; $i++) {
+                BobotRapor::create([
+                    'id_alternatif' =>$request->alternatif,
+                    'id_mapel' => $request->id_mapel[$i],
+                    'bobot' => $request->bobot[$i]
+                ]);
+            }
+
+            return redirect('/admin/bobotRmib')->with('success', 'Data bobot nilai Rapor berhasil ditambahkan!');
+        } else {
+            return redirect('/admin/bobotRmib')->with('error', 'Data jurusan tidak boleh kosong!');
+        }
     }
 
     /**
@@ -53,7 +70,15 @@ class BobotRaporController extends Controller
      */
     public function update(Request $request, BobotRapor $bobotRapor)
     {
-        //
+        $count = count($request->id);
+
+        for ($i = 0; $i < $count; $i++)
+        {
+            BobotRapor::where('id', $request->id[$i])->update([
+                'bobot' => $request->bobot[$i]
+            ]);
+        }
+        return redirect('/admin/bobotRmib')->with('success', 'Data bobot nilai RMIB berhasil diatur!');
     }
 
     /**
@@ -62,5 +87,18 @@ class BobotRaporController extends Controller
     public function destroy(BobotRapor $bobotRapor)
     {
         //
+    }
+
+    public function aturBobot(Request $request)
+    {
+        $count = count($request->id);
+
+        for ($i = 0; $i < $count; $i++)
+        {
+            BobotRapor::where('id', $request->id[$i])->update([
+                'bobot' => $request->bobot[$i]
+            ]);
+        }
+        return redirect('/admin/bobotRmib')->with('success', 'Data bobot nilai Rapor berhasil diatur!');
     }
 }

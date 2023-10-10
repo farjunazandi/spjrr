@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\admin\SoalRmib;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\admin\KategoriRmib;
 
 class SoalRmibController extends Controller
 {
@@ -14,8 +15,9 @@ class SoalRmibController extends Controller
     public function index()
     {
         $soalRmib = SoalRmib::all();
+        $kategori = KategoriRmib::all();
 
-        return view('admin/soalRmib', compact('soalRmib'));
+        return view('admin/soalRmib', compact('soalRmib', 'kategori'));
     }
 
     /**
@@ -34,7 +36,8 @@ class SoalRmibController extends Controller
         SoalRmib::create([
             'nama_pekerjaan' => $request->nama_pekerjaan,
             'tipe_soal' => $request->tipe_soal,
-            'jenis_kelamin' => $request->jenis_kelamin
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'id_kategori' => $request->kategori
         ]);
 
         return redirect('/admin/soalRmib')->with('success', 'Data soal RMIB berhasil ditambahkan!');
@@ -64,7 +67,8 @@ class SoalRmibController extends Controller
         SoalRmib::where('id', $request->id)->update([
             'nama_pekerjaan' => $request->nama_pekerjaan,
             'tipe_soal' => $request->tipe_soal,
-            'jenis_kelamin' => $request->jenis_kelamin
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'id_kategori' => $request->kategori
         ]);
 
         return redirect('/admin/soalRmib')->with('success', 'Data soal RMIB berhasil diubah!');

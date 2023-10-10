@@ -5,14 +5,14 @@ namespace App\Models\admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BobotRapor extends Model
+class MataPelajaran extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function rpr_alt()
+    public function krt()
     {
-        return $this->belongsTo(Alternatif::class, 'id_alternatif');
+        return $this->belongsTo(Kriteria::class, 'id_kriteria');
     }
 }

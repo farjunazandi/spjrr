@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SoftLand Bootstrap Template - Index</title>
+  <title>SPJRR | 2023</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,14 +42,14 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.html">SoftLand</a></h1>
+        <h1><a href="index.html">SPJRR</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active " href="index.html">Masuk</a></li>
+          <li><a class="active" href="{{ url('/auth') }}">Masuk</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -74,18 +74,20 @@
 
     <div class="container">
       <div class="row align-items-center">
+        <div class="col-lg-4 iphone-wrap">
+          <img src="{{ url('assets/assets/img/sman3.jpg') }}" alt="Image" class="phone-1">
+          <!-- <img src="assets/img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200"> -->
+        </div>
         <div class="col-12 hero-text-image">
           <div class="row">
-            <div class="col-lg-8 text-center text-lg-start">
-              <h1 data-aos="fade-right">Promote Your App with SoftLand</h1>
-              <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit.</p>
-              <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="#" class="btn btn-outline-white">Get started</a></p>
+            <div class="col-lg-12 text-center text-lg-start">
+              <h2 data-aos="fade-right">Sistem Pendukung Keputusan Dalam Pemilihan Jurusan Di Perguruan Tinggi Berbasis Tes Minat RMIB Dan Nilai Rapor</h2>
+              <p class="mb-5" data-aos="fade-right" data-aos-delay="100">
+                Sistem yang diberi nama SPJRR (Sistem Pendukung Keputusan Pemilihan Jurusan Berbasis Tes Rmib dan Rapor) ini merupakan suatu proyek dari kegiatan bimbingan dan konseling yang dirancang untuk membantu siswa SMA yakni kelas XI dalam memilih jurusan kuliah sesuai dengan minat dan kemampuan akademiknya sebagai modal awal untuk merencanakan karier ke depan agar di kelas XII nanti dapat lebih fokus dan matang pada goal yang dituju. Adapun metode yang digunakan dalam sistem ini adalah metode Multi Attribute Utility Theory (MAUT) atau yang sering disebut sebagai metode penjumlahan terbobot
+              </p>
+              <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="{{ url('/auth') }}" class="btn btn-outline-white">Masuk</a></p>
             </div>
-            <div class="col-lg-4 iphone-wrap">
-              <img src="{{ url('softland/assets/img/phone_1.png') }}" alt="Image" class="phone-1" data-aos="fade-right">
-              <!-- <img src="assets/img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200"> -->
-            </div>
+            
           </div>
         </div>
       </div>

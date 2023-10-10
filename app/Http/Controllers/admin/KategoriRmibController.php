@@ -34,7 +34,8 @@ class KategoriRmibController extends Controller
     {
         KategoriRmib::create([
             'kategori' => $request->kategori,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi,
+            'nomor' => $request->nomor
         ]);
 
         $id = KategoriRmib::select('id')->orderBy('id', 'desc')->first();
@@ -76,7 +77,8 @@ class KategoriRmibController extends Controller
     {
         KategoriRmib::where('id', $request->id)->update([
             'kategori' => $request->kategori,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi,
+            'nomor' => $request->nomor
         ]);
 
         return redirect('/admin/kategoriRmib')->with('success', 'Data kategori RMIB berhasil diubah!');

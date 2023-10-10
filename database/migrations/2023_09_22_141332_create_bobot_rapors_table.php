@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('bobot_rapors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_mapel')->index();
+            $table->unsignedBigInteger('id_alternatif')->index();
+            $table->double('bobot');
             $table->timestamps();
+
+            $table->foreign('id_alternatif')->references('id')->on('alternatifs')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('id_mapel')->references('id')->on('mata_pelajarans')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

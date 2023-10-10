@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('kategori_rmibs', function (Blueprint $table) {
             $table->id();
+            $table->integer('nomor')->default(0);
+            $table->string('kode');
             $table->string('kategori');
             $table->string('deskripsi');
             $table->timestamps();
